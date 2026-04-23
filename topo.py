@@ -191,8 +191,6 @@ def ping_all():
     stop_services(net)
     net.stop()
 
-    delete_attack_script(attack_script)
-
 
 if __name__ == '__main__':
 
