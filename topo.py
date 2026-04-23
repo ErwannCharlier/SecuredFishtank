@@ -140,7 +140,9 @@ def setup_user(net:Mininet) -> None:
     http.cmd("useradd -m admin")
     http.cmd("echo 'admin:pingu' | chpasswd")
 
-
+    ftp = net['ftp']
+    ftp.cmd("useradd -m admin")
+    ftp.cmd("echo 'admin:root' | chpasswd")
 
 def stop_services(net: Mininet) -> None:
     """
@@ -174,7 +176,6 @@ def run():
     stop_services(net)
     net.stop()
 
-    delete_attack_script(attack_script)
 
 
 def ping_all():
