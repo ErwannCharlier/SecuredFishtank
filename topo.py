@@ -129,6 +129,17 @@ def setup_firewall(net: Mininet) -> None:
     r2.cmd("nft add rule inet filter forward ip saddr 10.1.0.0/24 accept")
     r2.cmd("nft add rule inet filter forward ip saddr 10.2.0.0/24 ip daddr { 10.12.0.10, 10.12.0.20, 10.12.0.30, 10.12.0.40 } accept")
 
+
+def setup_user(net:Mininet) -> None:
+    http = net['http']
+
+    http.cmd("useradd -m admin")
+    http.cmd("echo 'admin:pingu' | chpasswd")
+
+    ftp = net['ftp']
+    ftp.cmd("useradd -m admin")
+    ftp.cmd("echo 'admin:root' | chpasswd")
+
 def stop_services(net: Mininet) -> None:
     """
     Stop services on servers.
@@ -159,6 +170,7 @@ def run():
     net.stop()
 
 
+
 def ping_all():
     topo = TopoSecu()
     net = Mininet(topo=topo)
@@ -171,7 +183,6 @@ def ping_all():
     net.pingAll()
     stop_services(net)
     net.stop()
-
 
 
 if __name__ == '__main__':
