@@ -77,7 +77,6 @@ def start_services(net: Mininet) -> None:
     :param net: Mininet network
     """
     # Apache2 HTTP server
-    info(net['http'].cmd("sysctl -w net.ipv4.tcp_syncookies=0"))
     info(net['http'].cmd("/usr/sbin/apache2ctl -DFOREGROUND &"))
     # dnsmasq DNS server
     info(net['dns'].cmd("/usr/sbin/dnsmasq -k &"))
