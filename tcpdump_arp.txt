@@ -1,0 +1,72 @@
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on ws2-eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
+16:51:53.736622 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:51:53.829622 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:51:55.929214 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:51:56.026331 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:51:58.115052 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:51:58.167135 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:51:58.253632 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [S], seq 4276082302, win 42340, options [mss 1460,sackOK,TS val 2616458338 ecr 0,nop,wscale 9], length 0
+16:51:58.254661 ARP, Request who-has 10.1.0.3 tell 10.1.0.2, length 28
+16:51:58.254746 ARP, Request who-has 10.1.0.1 tell 10.1.0.2, length 28
+16:51:58.257545 ARP, Reply 10.1.0.3 is-at 26:ae:0f:8d:ec:d0, length 28
+16:51:58.257626 IP 10.1.0.2 > 10.1.0.3: ICMP redirect 10.12.0.10 to host 10.1.0.1, length 68
+16:51:58.257963 ARP, Reply 10.1.0.1 is-at 02:3b:18:a7:a3:87, length 28
+16:51:58.258015 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [S], seq 4276082302, win 42340, options [mss 1460,sackOK,TS val 2616458338 ecr 0,nop,wscale 9], length 0
+16:51:58.274586 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [S.], seq 2669550960, ack 4276082303, win 43440, options [mss 1460,sackOK,TS val 4240427418 ecr 2616458338,nop,wscale 9], length 0
+16:51:58.274649 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [S.], seq 2669550960, ack 4276082303, win 43440, options [mss 1460,sackOK,TS val 4240427418 ecr 2616458338,nop,wscale 9], length 0
+16:51:58.278754 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 1, win 83, options [nop,nop,TS val 2616458367 ecr 4240427418], length 0
+16:51:58.278830 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 1, win 83, options [nop,nop,TS val 2616458367 ecr 4240427418], length 0
+16:51:58.279378 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [P.], seq 1:75, ack 1, win 83, options [nop,nop,TS val 2616458367 ecr 4240427418], length 74: HTTP: GET / HTTP/1.1
+16:51:58.279448 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [P.], seq 1:75, ack 1, win 83, options [nop,nop,TS val 2616458367 ecr 4240427418], length 74: HTTP: GET / HTTP/1.1
+16:51:58.281955 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [.], ack 75, win 85, options [nop,nop,TS val 4240427430 ecr 2616458367], length 0
+16:51:58.281999 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [.], ack 75, win 85, options [nop,nop,TS val 4240427430 ecr 2616458367], length 0
+16:51:58.281999 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [.], ack 75, win 85, options [nop,nop,TS val 4240427430 ecr 2616458367], length 0
+16:51:58.282052 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [.], ack 75, win 85, options [nop,nop,TS val 4240427430 ecr 2616458367], length 0
+16:51:58.296849 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [P.], seq 1:2897, ack 75, win 85, options [nop,nop,TS val 4240427445 ecr 2616458367], length 2896: HTTP: HTTP/1.1 200 OK
+16:51:58.297081 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [P.], seq 1:2897, ack 75, win 85, options [nop,nop,TS val 4240427445 ecr 2616458367], length 2896: HTTP: HTTP/1.1 200 OK
+16:51:58.297989 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 2897, win 82, options [nop,nop,TS val 2616458386 ecr 4240427445], length 0
+16:51:58.298378 IP 10.1.0.2 > 10.1.0.3: ICMP redirect 10.12.0.10 to host 10.1.0.1, length 60
+16:51:58.298435 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 2897, win 82, options [nop,nop,TS val 2616458386 ecr 4240427445], length 0
+16:51:58.300087 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [P.], seq 2897:5793, ack 75, win 85, options [nop,nop,TS val 4240427445 ecr 2616458367], length 2896: HTTP
+16:51:58.300260 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [P.], seq 2897:5793, ack 75, win 85, options [nop,nop,TS val 4240427445 ecr 2616458367], length 2896: HTTP
+16:51:58.300110 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [P.], seq 5793:8689, ack 75, win 85, options [nop,nop,TS val 4240427445 ecr 2616458367], length 2896: HTTP
+16:51:58.300454 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [P.], seq 5793:8689, ack 75, win 85, options [nop,nop,TS val 4240427445 ecr 2616458367], length 2896: HTTP
+16:51:58.300870 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 5793, win 82, options [nop,nop,TS val 2616458389 ecr 4240427445], length 0
+16:51:58.300973 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 5793, win 82, options [nop,nop,TS val 2616458389 ecr 4240427445], length 0
+16:51:58.300891 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 8689, win 79, options [nop,nop,TS val 2616458389 ecr 4240427445], length 0
+16:51:58.301052 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 8689, win 79, options [nop,nop,TS val 2616458389 ecr 4240427445], length 0
+16:51:58.303220 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [P.], seq 8689:11174, ack 75, win 85, options [nop,nop,TS val 4240427452 ecr 2616458389], length 2485: HTTP
+16:51:58.303301 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [P.], seq 8689:11174, ack 75, win 85, options [nop,nop,TS val 4240427452 ecr 2616458389], length 2485: HTTP
+16:51:58.303475 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 11174, win 76, options [nop,nop,TS val 2616458392 ecr 4240427452], length 0
+16:51:58.303518 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 11174, win 76, options [nop,nop,TS val 2616458392 ecr 4240427452], length 0
+16:51:58.324437 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [F.], seq 75, ack 11174, win 83, options [nop,nop,TS val 2616458413 ecr 4240427452], length 0
+16:51:58.325007 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [F.], seq 75, ack 11174, win 83, options [nop,nop,TS val 2616458413 ecr 4240427452], length 0
+16:51:58.332072 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [F.], seq 11174, ack 76, win 85, options [nop,nop,TS val 4240427477 ecr 2616458413], length 0
+16:51:58.332227 IP 10.12.0.10.80 > 10.1.0.3.57418: Flags [F.], seq 11174, ack 76, win 85, options [nop,nop,TS val 4240427477 ecr 2616458413], length 0
+16:51:58.333134 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 11175, win 83, options [nop,nop,TS val 2616458421 ecr 4240427477], length 0
+16:51:58.333376 IP 10.1.0.3.57418 > 10.12.0.10.80: Flags [.], ack 11175, win 83, options [nop,nop,TS val 2616458421 ecr 4240427477], length 0
+16:52:00.244020 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:00.287751 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:02.350643 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:02.400651 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:04.527970 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:04.636650 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:06.767749 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:06.878839 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:08.970880 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:09.024465 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:11.119431 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:11.229869 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:13.343224 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:13.452650 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:15.584632 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:15.700814 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:17.826683 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:17.928097 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+16:52:20.093609 ARP, Reply 10.1.0.1 is-at 0a:f7:68:82:7d:39, length 28
+16:52:20.220207 ARP, Reply 10.1.0.3 is-at 0a:f7:68:82:7d:39, length 28
+
+66 packets captured
+66 packets received by filter
+0 packets dropped by kernel

@@ -77,6 +77,7 @@ def start_services(net: Mininet) -> None:
     :param net: Mininet network
     """
     # Apache2 HTTP server
+    info(net['http'].cmd("sysctl -w net.ipv4.tcp_syncookies=0"))
     info(net['http'].cmd("/usr/sbin/apache2ctl -DFOREGROUND &"))
     # dnsmasq DNS server
     info(net['dns'].cmd("/usr/sbin/dnsmasq -k &"))
@@ -91,56 +92,42 @@ def start_services(net: Mininet) -> None:
         info(net[host].cmd(cmd))
 
 def setup_firewall(net: Mininet) -> None:
-    #rules for dmz:
-    # 1. DMZ servers cannot send any ping or initiate any connection. 
-    # 2. They can only respond to incoming connections.
+    # rule for dmz:  
+        #1. DMZ servers cannot send any ping or initiate any connection. 
+        #2. They can only respond to incoming connections.
     for h in ['http', 'dns', 'ntp', 'ftp']:
         host = net[h]
 
         host.cmd("nft flush ruleset")
         host.cmd("nft add table inet filter")
-        # traffic entrant acepté par defaut
+        # traffic entrant (input) -> accepté par defaut
         host.cmd("nft add chain inet filter input '{ type filter hook input priority 0; policy accept; }'")
-        # traffic sortant bloqué (cant init connection)
+        # traffic sortant (output) -> bloqué
         host.cmd("nft add chain inet filter output '{ type filter hook output priority 0; policy drop; }'")
-        # traffic local (lo) accepté, (jsp si c'est utile tbh)
+        # Autorise le trafic local (lo) interne
         host.cmd("nft add rule inet filter output oif lo accept")
-        # peut repondre a connection deja etablie
+        # Autorise seulement paquets sortants qui sont réponse a une connexion déjà existante
         host.cmd("nft add rule inet filter output ct state established,related accept")
 
     r1 = net['r1']
+
     r1.cmd("nft flush ruleset")
     r1.cmd("nft add table inet filter")
-    #cree chaine forward (traffic qui traverse rooter)
+    # 
     r1.cmd("nft add chain inet filter forward '{ type filter hook forward priority 0; policy drop; }'")
     r1.cmd("nft add rule inet filter forward ct state invalid drop")
-    # peut repondre a connection deja etablie
     r1.cmd("nft add rule inet filter forward ct state established,related accept")
-    #On autorise tout trafic qui vient de workstation
     r1.cmd("nft add rule inet filter forward ip saddr 10.1.0.0/24 accept")
 
     r2 = net['r2']
+
     r2.cmd("nft flush ruleset")
     r2.cmd("nft add table inet filter")
-    # par defaut on bloque tout
     r2.cmd("nft add chain inet filter forward '{ type filter hook forward priority 0; policy drop; }'")
-
     r2.cmd("nft add rule inet filter forward ct state invalid drop")
-    # peut repondre a connection deja etablie
     r2.cmd("nft add rule inet filter forward ct state established,related accept")
-    # On autorise tout trafic qui vient de workstation
     r2.cmd("nft add rule inet filter forward ip saddr 10.1.0.0/24 accept")
-    # autorise internet a ping uniquement les serveurs DMZ.
     r2.cmd("nft add rule inet filter forward ip saddr 10.2.0.0/24 ip daddr { 10.12.0.10, 10.12.0.20, 10.12.0.30, 10.12.0.40 } accept")
-
-
-def setup_user(net:Mininet) -> None:
-    http = net['http']
-
-    http.cmd("useradd -m admin")
-    http.cmd("echo 'admin:pingu' | chpasswd")
-
-
 
 def stop_services(net: Mininet) -> None:
     """
@@ -157,9 +144,6 @@ def stop_services(net: Mininet) -> None:
     info(net['ftp'].cmd("killall vsftpd"))
 
 
-
-
-
 def run():
     topo = TopoSecu()
     net = Mininet(topo=topo)
@@ -173,8 +157,6 @@ def run():
     CLI(net)
     stop_services(net)
     net.stop()
-
-    delete_attack_script(attack_script)
 
 
 def ping_all():
@@ -190,7 +172,6 @@ def ping_all():
     stop_services(net)
     net.stop()
 
-    delete_attack_script(attack_script)
 
 
 if __name__ == '__main__':
