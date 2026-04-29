@@ -87,11 +87,11 @@ mininet> internet python3 attacks/bruteforce.py -t "10.12.0.10" -p "ssh"
 *Defense :* 
 
 ```shell
-mininet> r2 ftp sh defense/ftp_defense.sh
+mininet> r2 sh defense/ftp_defense.sh
 ```
 
 ```shell
-mininet> r2 ftp sh defense/ssh_deny_ssh.sh
+mininet> r2 sh defense/ssh_deny_ssh.sh
 ```
 
 ### Port Scanning : 
