@@ -87,7 +87,7 @@ mininet> internet python3 attacks/bruteforce.py -t "10.12.0.10" -p "ssh"
 *Defense :* 
 
 ```shell
-mininet> r2 sh defense/ftp_defense.sh
+mininet> ftp sh defense/ftp_defense.sh
 ```
 
 ```shell
