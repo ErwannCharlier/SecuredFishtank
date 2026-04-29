@@ -104,3 +104,38 @@ mininet> internet python3 attacks/network_scan.py
 mininet> r2 protect_network_scan.sh
 ```
 
+### ARP Poisoning
+
+The ARP poisoning attack is launched from `ws2`.  
+The goal is to poison the ARP cache of `ws3` by pretending that the gateway `r1` has the MAC address of `ws2`.
+
+```shell
+mininet> ws2 sh -c "python3 -u attacks/arp_poisoning.py > /tmp/arp_attack.log 2>&1 &"
+````
+
+We run it in the background because the attack continuously sends fake ARP replies, while we still need to use the Mininet terminal.
+
+To test that the attack worked, run:
+
+```shell
+mininet> ws3 ip neigh show 10.1.0.1
+```
+
+Expected result: `10.1.0.1` is mapped to the MAC address of `ws2`.
+
+Run the defense:
+
+```shell
+mininet> ws2 sh defense/protect_arp_poisoning.sh
+mininet> ws3 sh defense/protect_arp_poisoning.sh
+mininet> r1 sh defense/protect_arp_poisoning.sh
+```
+
+Test the defense:
+
+```shell
+mininet> ws2 sh -c "python3 -u attacks/arp_poisoning.py > /tmp/arp_attack.log 2>&1 &"
+mininet> ws3 sh -c "ping -c 1 10.1.0.1 >/dev/null && ip neigh show 10.1.0.1 && nft list table arp arp_guard"
+```
+
+Expected result: `10.1.0.1` still points to the real MAC address of `r1`, and the nftables counter shows dropped packets.
