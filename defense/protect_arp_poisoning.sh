@@ -4,7 +4,7 @@
 
 IPS="10.1.0.1 10.1.0.2 10.1.0.3"
 
-echo "[+] Starting ARP guard"
+echo "[+] Starting ARP protection"
 
 
 ip neigh flush all >/dev/null 2>&1 || true
@@ -44,7 +44,7 @@ do
 done
 
 echo ""
-echo "[+] ARP guard enabled"
+echo "[+] ARP protection enabled"
 echo ""
 echo "[+] nftables table:"
 nft list table arp arp_guard
