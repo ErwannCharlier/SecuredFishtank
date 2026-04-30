@@ -6,7 +6,7 @@ IPS="10.1.0.1 10.1.0.2 10.1.0.3"
 
 echo "[+] Starting ARP guard"
 
-# Clear the ARP cache 
+
 ip neigh flush all >/dev/null 2>&1 || true
 
 # Delete the previous ARP guard table if it already exists
@@ -44,7 +44,7 @@ do
 done
 
 echo ""
-echo "[+] ARP protection enabled"
+echo "[+] ARP guard enabled"
 echo ""
 echo "[+] nftables table:"
 nft list table arp arp_guard

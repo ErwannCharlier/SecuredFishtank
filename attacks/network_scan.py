@@ -47,39 +47,33 @@ def scan_tcp_port(ip, port):
 
 
 def scan_udp_port(ip, port):
-    packet = IP(dst=str(ip))
-    packet.add_payload(UDP(
+    packet = IP(dst=str(ip)) / UDP(
         sport=RandShort(),
         dport=port
-    ))
+    )
 
     if port == 5353:
-        packet[UDP].add_payload(DNS(
+        packet = packet / DNS(
             rd=1,
             qd=DNSQR(qname="example.com")
-        ))
+        )
 
     if port == 123:
-        packet[UDP].add_payload(Raw(
+        packet = packet / Raw(
             load=b"\x1b" + 47 * b"\x00"
-        ))
+        )
 
     answer = sr1(packet, timeout=0.5)
 
     if answer is None:
-        return "open|filtered"
+        return None
 
     if answer.haslayer(ICMP):
         icmp = answer[ICMP]
-
         if icmp.type == 3 and icmp.code == 3:
             return "closed"
 
-    if answer.haslayer(UDP):
-        return "open"
-
-    return "unknown"
-
+    return "open"
 
 def scan_network(network_name, network):
     print(f"\n[+] Scanning {network_name}: {network}")
@@ -95,12 +89,10 @@ def scan_network(network_name, network):
             if scan_tcp_port(ip, port):
                 open_tcp_ports.append(port)
 
-        if host_is_alive or open_tcp_ports:
-            for port in udp_ports:
-                result = scan_udp_port(ip, port)
-                if result == "open":
-                    udp_ports_found.append((port, result))
-
+        for port in udp_ports:
+            result = scan_udp_port(ip, port)
+            if result == "open":
+                udp_ports_found.append((port, result))
         if host_is_alive or open_tcp_ports or udp_ports_found:
             print(f"\nHost found: {ip}")
 
